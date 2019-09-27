@@ -1,2 +1,5 @@
 AngularJSApp/node_modules/
-maventutorial/target/classes/
+maventutorial/target/
+AngularJSApp/npm-debug.log
+maventutorial/.idea/*
+maventutorial/.attach_pid*
