@@ -86,7 +86,7 @@ app.controller('loginCtrl', function($scope, $location){
 		(async () => {
 			var response = await axios({
 				method: 'POST',
-			  	URL: 'http://localhost:8080/login',
+			  	url: 'http://localhost:8080/login',
 			  	headers: {
 					'Access-Control-Allow-Origin': '*',
 					'Content-Type': 'application/json'
