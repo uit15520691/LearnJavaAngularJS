@@ -19,4 +19,7 @@ public class UserServiceImple implements UserService {
 
         return userDAO.getAllUsers();
     }
+    public int login(String email, String password){
+        return  userDAO.login(email, password);
+    }
 }

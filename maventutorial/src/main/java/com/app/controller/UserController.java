@@ -1,6 +1,8 @@
 package com.app.controller;
 
 import com.app.entity.Users;
+import com.app.models.LoginForm;
+import com.app.models.LoginResponse;
 import com.app.services.UserService;
 
 
@@ -28,5 +30,12 @@ public class UserController {
             return new ResponseEntity<List<Users>>(users, HttpStatus.OK);
         }
         return new ResponseEntity<List<Users>>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/login", method = {RequestMethod.POST})
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginForm input){
+        int id= userService.login(input.getEmail(),input.getPassword());
+        LoginResponse loginResponse = new LoginResponse(id);
+        return new ResponseEntity<LoginResponse>(loginResponse,HttpStatus.OK);
     }
 }
