@@ -8,10 +8,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "email")
     private String email;
 
@@ -26,15 +22,6 @@ public class Users {
 
     @Column(name = "subscribed")
     private String subscribed;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int ID) {
-        this.id = ID;
-    }
 
     public String getName() {
         return name;

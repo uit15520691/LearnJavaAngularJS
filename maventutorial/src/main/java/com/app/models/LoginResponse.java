@@ -2,15 +2,15 @@ package com.app.models;
 
 
 public class LoginResponse {
-    private int id;
-    public LoginResponse(int id){
-        this.id = id;
+    private String message;
+    public LoginResponse(String message){
+        this.message = message;
     }
-    public void setId(int id){
-        this.id=id;
+    public void setMessage(String message){
+        this.message=message;
     }
-    public int getId() {
-        return id;
+    public String getMessage() {
+        return message;
     }
 
 }

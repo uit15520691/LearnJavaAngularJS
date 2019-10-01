@@ -19,7 +19,24 @@ public class UserServiceImple implements UserService {
 
         return userDAO.getAllUsers();
     }
-    public int login(String email, String password){
-        return  userDAO.login(email, password);
+
+    public String login(String email, String password) {
+        int loginResult = userDAO.login(email,password);
+        if(loginResult==1){
+            return email+"@succeeded";
+        }
+        return "failed";
+    }
+
+    public String register(String email, String password, String name, int age, String subscribed){
+        if(password.isEmpty()||email.isEmpty()){
+            return "failed";
+        }
+        int isSuccess = userDAO.register(email, password, name,age, subscribed);
+        if (isSuccess==0)
+        {
+            return "succeeded";
+        }
+        return "failed";
     }
 }

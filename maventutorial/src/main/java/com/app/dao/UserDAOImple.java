@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -23,15 +24,34 @@ public class UserDAOImple implements UserDAO {
         return list;
     }
     public int login(String email,String password){
-        String queryString = "Select id from users " +
-                "where email= "+(char)34+email+(char)34+" and password= "+(char)34+password+(char)34;
-        System.out.println(queryString);
-        Session session = sessionFactory.getCurrentSession();
-        List<Integer> id = session.createNativeQuery(queryString).list();
-        if(id.isEmpty()){
+        String queryString = "Select `email` from `users` " +
+                "where `email`= '"+email+"' and `password`= '"+password+"'";
+        Session session = sessionFactory.openSession();
+        List<String> result = session.createNativeQuery(queryString).list();
+        if(result.isEmpty()){
             return 0;
         }
-        return id.get(0);
+        return 1;
     }
 
+    @Transactional
+    public int register(String email, String password,String name, int age, String subscribed ){
+        Users user = new Users();
+        user.setEmail(email);;
+        user.setPassword(password);
+        user.setName(name);
+        user.setAge(age);
+        user.setSubscribed(subscribed);
+
+        try (Session session = sessionFactory.openSession();){
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        }
+        catch(Exception e){
+            return -1;
+        }
+
+        return 0;
+    }
 }

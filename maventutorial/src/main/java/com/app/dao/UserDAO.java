@@ -11,6 +11,9 @@ import java.util.List;
 @Transactional
 public interface UserDAO {
     public List<Users> getAllUsers();
+
     public int login(String email, String password);
+
+    public int register(String email, String password, String name, int age, String subscribed);
 }
 

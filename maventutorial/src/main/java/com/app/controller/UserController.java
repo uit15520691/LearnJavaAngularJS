@@ -2,7 +2,9 @@ package com.app.controller;
 
 import com.app.entity.Users;
 import com.app.models.LoginForm;
-import com.app.models.LoginResponse;
+
+import com.app.models.RegisterForm;
+import com.app.models.Response;
 import com.app.services.UserService;
 
 
@@ -33,9 +35,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginForm input){
-        int id= userService.login(input.getEmail(),input.getPassword());
-        LoginResponse loginResponse = new LoginResponse(id);
-        return new ResponseEntity<LoginResponse>(loginResponse,HttpStatus.OK);
+    public ResponseEntity<Response> login(@RequestBody LoginForm input){
+        String result= userService.login(input.getEmail(),input.getPassword());
+        Response Response = new Response(result, input.getEmail());
+        return new ResponseEntity<Response>(Response,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/register", method = {RequestMethod.POST})
+    public ResponseEntity<Response> register(@RequestBody RegisterForm input){
+        String result= userService.register(input.getEmail(),input.getPassword(), input.getName(), input.getAge(),input.getSubscribed());
+        Response registerResponse = new Response(result,input.getEmail());
+        return new ResponseEntity<Response>(registerResponse,HttpStatus.OK);
     }
 }
