@@ -1,6 +1,6 @@
-package com.app.services;
+package com.app.services.user;
 
-import com.app.dao.UserDAO;
+import com.app.dao.user.UserDao;
 import com.app.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +12,16 @@ import java.util.List;
 @Transactional
 public class UserServiceImple implements UserService {
     @Autowired
-    UserDAO userDAO;
+    UserDao userDao;
 
     @Override
     public List<Users> getAllUser() {
 
-        return userDAO.getAllUsers();
+        return userDao.getAllUsers();
     }
 
     public String login(String email, String password) {
-        int loginResult = userDAO.login(email,password);
+        int loginResult = userDao.login(email,password);
         if(loginResult==1){
             return "succeeded";
         }
@@ -32,7 +32,7 @@ public class UserServiceImple implements UserService {
         if(password.isEmpty()||email.isEmpty()){
             return "failed";
         }
-        int isSuccess = userDAO.register(email, password, name,age, subscribed);
+        int isSuccess = userDao.register(email, password, name,age, subscribed);
         if (isSuccess==0)
         {
             return "succeeded";

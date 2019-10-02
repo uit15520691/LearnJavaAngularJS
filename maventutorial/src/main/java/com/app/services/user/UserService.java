@@ -1,4 +1,4 @@
-package com.app.services;
+package com.app.services.user;
 
 import com.app.entity.Users;
 
