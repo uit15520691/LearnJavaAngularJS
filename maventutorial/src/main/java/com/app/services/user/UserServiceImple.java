@@ -23,7 +23,7 @@ public class UserServiceImple implements UserService {
     public String login(String email, String password) {
         int loginResult = userDAO.login(email,password);
         if(loginResult==1){
-            return email+"@succeeded";
+            return "succeeded";
         }
         return "failed";
     }
