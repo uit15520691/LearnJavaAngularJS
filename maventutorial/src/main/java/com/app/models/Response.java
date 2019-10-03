@@ -5,18 +5,20 @@ public class Response {
     private String message;
     private String email;
 
-    public Response(String action,String message, String email)
-    {
+    public Response(String action, String message, String email) {
         this.action = action;
-        this.message=message;
-        this.email=email;
+        this.message = message;
+        this.email = email;
     }
-    public void setAction(String action){
-        this.action = action;
-    }
-    public String getAction(){
+
+    public String getAction() {
         return action;
     }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
     public String getMessage() {
         return message;
     }

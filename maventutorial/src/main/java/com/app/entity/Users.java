@@ -2,6 +2,8 @@ package com.app.entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -22,6 +24,21 @@ public class Users {
 
     @Column(name = "subscribed")
     private String subscribed;
+
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name = "user_room",
+            joinColumns = @JoinColumn(name = "userEmail"),
+            inverseJoinColumns = @JoinColumn(name = "roomID"))
+    private List<Rooms> roomList = new ArrayList<>();
+
+    public List<Rooms> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List<Rooms> roomList) {
+        this.roomList = roomList;
+    }
 
     public String getName() {
         return name;

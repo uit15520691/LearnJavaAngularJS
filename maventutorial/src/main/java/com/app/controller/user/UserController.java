@@ -2,16 +2,16 @@ package com.app.controller.user;
 
 import com.app.entity.Users;
 import com.app.models.LoginForm;
-
 import com.app.models.RegisterForm;
 import com.app.models.Response;
 import com.app.services.user.UserService;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -35,16 +35,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public ResponseEntity<Response> login(@RequestBody LoginForm input){
-        String result= userService.login(input.getEmail(),input.getPassword());
-        Response Response = new Response("login",result, input.getEmail());
-        return new ResponseEntity<Response>(Response,HttpStatus.OK);
+    public ResponseEntity<Response> login(@RequestBody LoginForm input) {
+        String result = userService.login(input.getEmail(), input.getPassword());
+        Response Response = new Response("login", result, input.getEmail());
+        return new ResponseEntity<Response>(Response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/register", method = {RequestMethod.POST})
-    public ResponseEntity<Response> register(@RequestBody RegisterForm input){
-        String result= userService.register(input.getEmail(),input.getPassword(), input.getName(), input.getAge(),input.getSubscribed());
-        Response registerResponse = new Response("register",result,input.getEmail());
-        return new ResponseEntity<Response>(registerResponse,HttpStatus.OK);
+    public ResponseEntity<Response> register(@RequestBody RegisterForm input) {
+        String result = userService.register(input.getEmail(), input.getPassword(), input.getName(), input.getAge(), input.getSubscribed());
+        Response registerResponse = new Response("register", result, input.getEmail());
+        return new ResponseEntity<Response>(registerResponse, HttpStatus.OK);
     }
 }

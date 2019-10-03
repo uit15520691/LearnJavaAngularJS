@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -21,22 +22,25 @@ public class UserServiceImple implements UserService {
     }
 
     public String login(String email, String password) {
-        int loginResult = userDao.login(email,password);
-        if(loginResult==1){
+        int loginResult = userDao.login(email, password);
+        if (loginResult == 1) {
             return "succeeded";
         }
         return "failed";
     }
 
-    public String register(String email, String password, String name, int age, String subscribed){
-        if(password.isEmpty()||email.isEmpty()){
+    public String register(String email, String password, String name, int age, String subscribed) {
+        if (password.isEmpty() || email.isEmpty()) {
             return "failed";
         }
-        int isSuccess = userDao.register(email, password, name,age, subscribed);
-        if (isSuccess==0)
-        {
+        int isSuccess = userDao.register(email, password, name, age, subscribed);
+        if (isSuccess == 0) {
             return "succeeded";
         }
         return "failed";
     }
+
+//    public Map<String, Object> getUserInfo(String email){
+//        return userDao.getUserInfo(email);
+//    }
 }

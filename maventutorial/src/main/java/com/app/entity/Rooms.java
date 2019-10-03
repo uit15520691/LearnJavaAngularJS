@@ -1,14 +1,14 @@
 package com.app.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "rooms")
 public class Rooms {
     @Id
+    @GeneratedValue
     @Column(name = "id")
     private int id;
 
@@ -18,27 +18,42 @@ public class Rooms {
     @Column(name = "floor")
     private int floor;
 
-    public void setId(int id) {
-        this.id = id;
+    private List<Users> userList = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList")
+    public List<Users> getUserList() {
+        return userList;
     }
+
+    public void setUserList(List<Users> userList) {
+        this.userList = userList;
+    }
+
+
+//    @ManyToMany(mappedBy = "rooms")
+//    private List<Users> users = new ArrayList<>();
 
     public int getId() {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getFloor() {
         return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 }

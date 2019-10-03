@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
-
-public class app {
-}
+//import org.junit.Test;
+//
+//public class app {
+//    @Test
+//
+//}

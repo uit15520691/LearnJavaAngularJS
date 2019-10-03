@@ -13,9 +13,10 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class App {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
+
     @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

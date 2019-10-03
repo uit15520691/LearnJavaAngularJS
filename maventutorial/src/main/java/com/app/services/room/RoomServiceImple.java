@@ -15,34 +15,35 @@ public class RoomServiceImple implements RoomService {
     @Autowired
     private RoomDao roomDao;
 
-    public Rooms findRoomByID(int id){
+    public Rooms findRoomByID(int id) {
         return roomDao.findRoomByID(id);
     }
 
-    public Rooms findRoomByName(String name){
+    public Rooms findRoomByName(String name) {
         return roomDao.findRoomByName(name);
     }
-    public List<Rooms> findAllroom(){
-        return roomDao.findAllroom();
+
+    public List<Rooms> findAllRooms() {
+        return roomDao.findAllRooms();
     }
-    public String removeRoomByID(int id){
+
+    public String removeRoomByID(int id) {
         int result = roomDao.removeRoomByID(id);
-        if(result== 0){
+        if (result == 0) {
             return "succeeded";
         }
         return "failed";
     }
 
-    public String addRoom(String name, int floor){
-        int result = roomDao.addRoom(name,floor);
-        if(result== 0){
+    public String addRoom(String name, int floor) {
+        int result = roomDao.addRoom(name, floor);
+        if (result == 0) {
             return "succeeded";
         }
         return "failed";
     }
 
-    public Rooms findLastRoom()
-    {
+    public Rooms findLastRoom() {
         return roomDao.findLastRoom();
     }
 }

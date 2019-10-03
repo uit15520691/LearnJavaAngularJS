@@ -6,16 +6,20 @@ public class RegisterForm {
     private String name;
     private int age;
     private String subscribed;
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public String getSubscribed(){
+
+    public String getSubscribed() {
         return subscribed;
     }
 

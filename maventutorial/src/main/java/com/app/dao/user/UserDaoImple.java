@@ -1,5 +1,6 @@
 package com.app.dao.user;
 
+import com.app.entity.Rooms;
 import com.app.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -42,14 +44,36 @@ public class UserDaoImple implements UserDao {
         user.setAge(age);
         user.setSubscribed(subscribed);
 
-        try (Session session = sessionFactory.openSession()) {
+        Rooms rooms = new Rooms();
+        rooms.setId(10);
+        rooms.setName("New room");
+        rooms.setFloor(10);
+
+        List<Rooms> roomList = new ArrayList<Rooms>();
+        roomList.add(rooms);
+
+        user.setRoomList(roomList);
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            return -1;
+            System.out.println(e.getCause());
+        } finally {
+            session.close();
         }
 
         return 0;
+    }
+
+    public Object getUserInfo(String email){
+        String queryString = "SELECT `usr.email`, `i.name`, `i.contry`, `i.sdt`  FROM `user usr`" +
+                "INNER JOIN `userinfo` t " +
+                "WHERE `usr.email` = `usr.email`";
+        Session session = sessionFactory.getCurrentSession();
+        Object info = session.createNativeQuery(queryString).list().get(0);
+        return info;
     }
 }
