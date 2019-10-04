@@ -16,21 +16,34 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "age")
-    private int age;
-
     @Column(name = "subscribed")
     private String subscribed;
 
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private UserInfo userInfo;
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_room",
             joinColumns = @JoinColumn(name = "userEmail"),
             inverseJoinColumns = @JoinColumn(name = "roomID"))
     private List<Rooms> roomList = new ArrayList<>();
+
+    public Users(String email, String password, String subscribed) {
+        this.email = email;
+        this.password = password;
+        this.subscribed = subscribed;
+    }
+
+    public Users(){}
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public List<Rooms> getRoomList() {
         return roomList;
@@ -38,14 +51,6 @@ public class Users {
 
     public void setRoomList(List<Rooms> roomList) {
         this.roomList = roomList;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String Name) {
-        this.name = Name;
     }
 
     public String getEmail() {
@@ -62,14 +67,6 @@ public class Users {
 
     public void setPassword(String Password) {
         this.password = Password;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int Age) {
-        this.age = Age;
     }
 
     public String getSubscribed() {

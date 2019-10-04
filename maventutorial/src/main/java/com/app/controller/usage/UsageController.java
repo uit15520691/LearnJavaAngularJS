@@ -1,6 +1,6 @@
 package com.app.controller.usage;
 
-import com.app.entity.Usage;
+import com.app.entity.User_Room;
 import com.app.models.RegisterUsageForm;
 import com.app.services.usage.UsageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ public class UsageController {
     UsageService usageService;
 
     @RequestMapping(value = "/usage/all", method = RequestMethod.GET)
-    public ResponseEntity<List<Usage>> getAllUsage() {
-        return new ResponseEntity<List<Usage>>(usageService.getAllUsage(), HttpStatus.OK);
+    public ResponseEntity<List<User_Room>> getAllUsage() {
+        return new ResponseEntity<List<User_Room>>(usageService.getAllUsage(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/usage/register", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, Usage>> registerUsage(@RequestBody RegisterUsageForm input) {
+    public ResponseEntity<Map<String, User_Room>> registerUsage(@RequestBody RegisterUsageForm input) {
         int id = input.getId();
         String email = input.getEmail();
-        return new ResponseEntity<Map<String, Usage>>(usageService.registerUsage(id, email), HttpStatus.OK);
+        return new ResponseEntity<Map<String, User_Room>>(usageService.registerUsage(id, email), HttpStatus.OK);
     }
 }

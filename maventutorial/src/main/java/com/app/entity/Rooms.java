@@ -8,7 +8,6 @@ import java.util.List;
 @Table(name = "rooms")
 public class Rooms {
     @Id
-    @GeneratedValue
     @Column(name = "id")
     private int id;
 
@@ -18,9 +17,9 @@ public class Rooms {
     @Column(name = "floor")
     private int floor;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList", cascade = CascadeType.ALL)
     private List<Users> userList = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList")
     public List<Users> getUserList() {
         return userList;
     }
@@ -29,6 +28,7 @@ public class Rooms {
         this.userList = userList;
     }
 
+    public Rooms(){}
 
 //    @ManyToMany(mappedBy = "rooms")
 //    private List<Users> users = new ArrayList<>();

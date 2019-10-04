@@ -1,11 +1,16 @@
 package com.app.services.user;
 
 import com.app.dao.user.UserDao;
+import com.app.entity.UserInfo;
 import com.app.entity.Users;
+import com.app.models.LoginDTO;
+import com.app.models.RegisterDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,23 +26,45 @@ public class UserServiceImple implements UserService {
         return userDao.getAllUsers();
     }
 
-    public String login(String email, String password) {
-        int loginResult = userDao.login(email, password);
-        if (loginResult == 1) {
-            return "succeeded";
+    public Map<String, Object> login(LoginDTO accountInfo) {
+        String email = accountInfo.getEmail();
+        String password = accountInfo.getPassword();
+
+        // chua tao duoc token nen dung email
+        String loginEmail = userDao.login(email, password);
+        Map<String, Object> result = new HashMap<>();
+        if (loginEmail != null) {
+            result.put("Succeeded", loginEmail);
+            return result;
         }
-        return "failed";
+        result.put("Failed", loginEmail);
+        return result;
     }
 
-    public String register(String email, String password, String name, int age, String subscribed) {
+    public Map<String, UserInfo> register(RegisterDTO accountInfo) {
+        String email = accountInfo.getEmail();
+        String password = accountInfo.getPassword();
+        String name = accountInfo.getName();
+        String country = accountInfo.getCountry();
+        String sdt = accountInfo.getSdt();
+        String subscribed = accountInfo.getSubscribed();
+        int age = accountInfo.getAge();
+
+        Map<String, UserInfo> result = new HashMap<>();
         if (password.isEmpty() || email.isEmpty()) {
-            return "failed";
+            result.put("Failed", null);
+            return result;
         }
-        int isSuccess = userDao.register(email, password, name, age, subscribed);
-        if (isSuccess == 0) {
-            return "succeeded";
+
+        Users user= new Users(email,password,subscribed);
+        UserInfo userInfo = new UserInfo(email, name, country,sdt,age);
+        user.setUserInfo(userInfo);
+        if (userDao.register(user) != -1) {
+            result.put("Succeeded", userInfo);
+            return result;
         }
-        return "failed";
+        result.put("Failed", null);
+        return result;
     }
 
 //    public Map<String, Object> getUserInfo(String email){

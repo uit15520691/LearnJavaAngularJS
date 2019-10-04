@@ -2,15 +2,21 @@ package com.app.entity;
 
 import javax.persistence.*;
 
-@Embeddable
-@Table(name = "usage")
-public class Usage {
+@Entity
+@Table(name = "user_room")
+public class User_Room {
     @Id
     @Column(name = "roomID")
     private int roomID;
 
     @Column(name = "userEmail")
     private String userEmail;
+
+    public User_Room(){}
+    public User_Room(int roomID, String userEmail){
+        this.roomID = roomID;
+        this.userEmail = userEmail;
+    }
 
     public int getRoomID() {
         return roomID;

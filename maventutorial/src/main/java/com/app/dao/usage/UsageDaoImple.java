@@ -1,12 +1,17 @@
 package com.app.dao.usage;
 
-import com.app.entity.Usage;
+import com.app.dao.room.RoomDao;
+import com.app.dao.user.UserDao;
+import com.app.entity.Rooms;
+import com.app.entity.User_Room;
+import com.app.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,25 +19,43 @@ public class UsageDaoImple implements UsageDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Usage> getAllUsage() {
+    @Autowired
+    UserDao userDao;
+
+    @Autowired
+    RoomDao roomDao;
+
+    public List<User_Room> getAllUsage() {
         String queryString = "SELECT * FROM `usage`";
         Session session = sessionFactory.getCurrentSession();
-        List<Usage> usage = session.createNativeQuery(queryString).list();
-        return usage;
+        List<User_Room> userRoom = session.createNativeQuery(queryString).list();
+     return userRoom;
     }
 
+
     @Transactional
-    public Usage registerUsage(int id, String email) {
-        Usage usage = new Usage();
-        usage.setRoomID(id);
-        usage.setUserEmail(email);
-        try (Session session = sessionFactory.openSession()) {
+    public User_Room registerUsage( int roomID, String userEmail) {
+        User_Room userRoom = null;
+        try (Session session = sessionFactory.openSession()){
+            Users user = userDao.getUserByEmail(userEmail);
+            Rooms room = roomDao.findRoomByID(roomID);
+            if (user == null || room== null){
+                System.out.println("Room or User not exist!");
+                return null;
+            }
             session.beginTransaction();
-            session.save(usage);
+//            String queryString = "INSERT INTO `user_room` values("+ roomID+", '"+userEmail+"')";
+//            session.createNativeQuery(queryString,User_Room.class).list().get(0);
+            userRoom = new User_Room(roomID,userEmail);
+            session.save(userRoom);
             session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.getCause());
+
         }
-        return usage;
+        catch (Exception e) {
+            System.out.println(e.getCause());
+            return null;
+        }
+        return userRoom;
+
     }
 }

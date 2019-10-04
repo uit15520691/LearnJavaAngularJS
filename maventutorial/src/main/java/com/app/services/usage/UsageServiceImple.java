@@ -1,7 +1,7 @@
 package com.app.services.usage;
 
 import com.app.dao.usage.UsageDao;
-import com.app.entity.Usage;
+import com.app.entity.User_Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,17 +16,17 @@ public class UsageServiceImple implements UsageService {
     @Autowired
     UsageDao usageDao;
 
-    public List<Usage> getAllUsage() {
+    public List<User_Room> getAllUsage() {
         return usageDao.getAllUsage();
     }
 
-    public Map<String, Usage> registerUsage(int id, String email) {
-        Usage usage = usageDao.registerUsage(id, email);
-        Map<String, Usage> map = new HashMap<String, Usage>();
-        if (usage != null) {
-            map.put("Succeeded", usage);
+    public Map<String, User_Room> registerUsage(int roomID, String userEmail) {
+        User_Room userRoom = usageDao.registerUsage(roomID, userEmail);
+        Map<String, User_Room> map = new HashMap<String, User_Room>();
+        if (userRoom != null) {
+            map.put("Succeeded", userRoom);
         } else {
-            map.put("Failed", usage);
+            map.put("Failed", userRoom);
         }
         return map;
     }

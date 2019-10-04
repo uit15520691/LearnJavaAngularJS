@@ -1,6 +1,6 @@
 package com.app.models;
 
-public class RegisterForm {
+public class UserDTO {
     private String email;
     private String password;
     private String name;
@@ -11,19 +11,19 @@ public class RegisterForm {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getName() {
         return name;
     }
 
-    public String getSubscribed() {
-        return subscribed;
-    }
-
     public int getAge() {
         return age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSubscribed() {
+        return subscribed;
     }
 }

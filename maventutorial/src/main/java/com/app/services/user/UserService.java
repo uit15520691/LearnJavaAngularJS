@@ -1,6 +1,9 @@
 package com.app.services.user;
 
+import com.app.entity.UserInfo;
 import com.app.entity.Users;
+import com.app.models.LoginDTO;
+import com.app.models.RegisterDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,9 +11,9 @@ import java.util.Map;
 public interface UserService {
     public List<Users> getAllUser();
 
-    public String login(String email, String password);
+    public Map<String, Object> login(LoginDTO accountInfo);
 
-    public String register(String email, String password, String name, int age, String subscribed);
+    public Map<String, UserInfo> register(RegisterDTO userInfo);
 
 //    public Map<String, Object> getUserInfo(String email);
 }
