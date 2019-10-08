@@ -17,5 +17,5 @@ public interface UserDao {
     public int register(Users user);
     public Users getUserByEmail(String email);
 
-    public Object getUserInfo(String email);
+    public UserInfo getUserInfo(String email);
 }

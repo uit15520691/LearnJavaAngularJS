@@ -5,7 +5,6 @@ import com.app.entity.UserInfo;
 import com.app.entity.Users;
 import com.app.models.LoginDTO;
 import com.app.models.RegisterDTO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,8 +55,8 @@ public class UserServiceImple implements UserService {
             return result;
         }
 
-        Users user= new Users(email,password,subscribed);
-        UserInfo userInfo = new UserInfo(email, name, country,sdt,age);
+        Users user = new Users(email, password, subscribed);
+        UserInfo userInfo = new UserInfo(email, name, country, sdt, age);
         user.setUserInfo(userInfo);
         if (userDao.register(user) != -1) {
             result.put("Succeeded", userInfo);
@@ -67,7 +66,11 @@ public class UserServiceImple implements UserService {
         return result;
     }
 
-//    public Map<String, Object> getUserInfo(String email){
-//        return userDao.getUserInfo(email);
-//    }
+    public Users getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    public UserInfo getUserInfo(String email) {
+        return userDao.getUserInfo(email);
+    }
 }

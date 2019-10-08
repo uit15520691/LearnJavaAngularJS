@@ -15,5 +15,6 @@ public interface UserService {
 
     public Map<String, UserInfo> register(RegisterDTO userInfo);
 
-//    public Map<String, Object> getUserInfo(String email);
+    public UserInfo getUserInfo(String email);
+    public Users getUserByEmail(String email);
 }
