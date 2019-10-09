@@ -1,0 +1,12 @@
+<div style="background-color: lightblue;margin-right: 15px; float: right;min-height:100px;width: 48%;border-style: solid; border-color: blue" class="collumn-2">
+    <div style="margin-left: 15px">
+        <h3>{{selectedTodo.title}}</h3>
+    </div>
+    <div style="margin-bottom: 15px; margin-left: 15px">
+            {{selectedTodo.detail}}
+    </div>
+</div>
+<div style="float: right; border-style: solid; margin: 15px;">
+    <button ng-if='selectedTodo' ng-click="delete()">Delete</button>
+    <button ng-if='selectedTodo' >Update</button>
+</div>

@@ -1,0 +1,12 @@
+<div ng-if="isAdding"  style="border-style: solid; margin:15px">                
+    <div>
+        <label for="titleInput">Todo title:</label>
+        <input type="text" name="titleInput" ng-model="newTodo.title" style="width:90%">
+    </div>
+    <div>
+        <label for="detailInput" >Todo detail:</label>
+    </div>
+    <div>
+        <textarea ng-model="newTodo.detail" style="display: table-cell; width: 98%;height: 70px;" type="text" name="detailInput"> </textarea>
+    </div>
+</div>

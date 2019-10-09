@@ -1,5 +1,7 @@
-var app = angular.module('main', ['ngRoute','loginControllerModule']);
+// create angular app name "main"
+var app = angular.module('main', ['ngRoute','loginControllerModule','RegisterControllerModule','HomeWorkModule',"DirectiveModule"]);
 
+// can be written in a different file 
 app.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl: './views/home/home.html',
@@ -9,8 +11,12 @@ app.config(function($routeProvider) {
 		controller: 'LoginController'
 	}).when('/register', {
 		templateUrl: './views/register/register.html',
-		controller: 'registerCtrl'
-	}).otherwise({
+		controller: 'RegisterController'
+	}).when('/homework', {
+		templateUrl: './views/homework/homeWork.html',
+		controller: 'HomeWorkController'
+	})
+	.otherwise({
 		template: '404'
 	})
 });
