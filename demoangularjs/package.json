@@ -1,0 +1,14 @@
+{
+  "name": "demoangularjs",
+  "version": "1.0.0",
+  "description": "demo project",
+  "main": "app.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "quang nguyen",
+  "license": "ISC",
+   "dependencies": {
+    "lite-server": "^2.5.4"
+  }
+}

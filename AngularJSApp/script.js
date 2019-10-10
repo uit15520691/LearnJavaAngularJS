@@ -1,5 +1,5 @@
 // create angular app name "main"
-var app = angular.module('main', ['ngRoute','loginControllerModule','RegisterControllerModule','HomeWorkModule',"DirectiveModule"]);
+var app = angular.module('main', ['ngRoute','loginControllerModule','RegisterControllerModule',"DirectiveModule"]);
 
 // can be written in a different file 
 app.config(function($routeProvider) {

@@ -1,0 +1,22 @@
+<div class="column-2">
+    <div ng-if="!isUpdating">
+        <div style="margin-left: 15px;">
+            <h3>{{selectedTodo.title}}</h3>
+        </div>
+        <div style="margin-bottom: 15px; margin-left: 15px;">
+            {{selectedTodo.detail}}
+        </div>
+    </div>
+    <update-form></update-form>
+</div>
+<div ng-if='selectedTodo.title' style="float: right; margin: 15px;">
+    <div ng-if="!isUpdating">
+            <button ng-click="delete()">Delete</button>
+            <button ng-click="showUpdateForm()">Update</button>
+    </div>
+    <div ng-if="isUpdating">
+            <button ng-click="ok()">OK</button>
+            <button ng-click="cancelUpdate()">Cancel</button>
+    </div>
+    
+</div>

@@ -1,4 +1,4 @@
-<div style="background-color: lightblue; margin-bottom: 15px;margin-left: 15px;float: left;min-height:200px;width: 48%;border-style: solid; border-color: blue" class="collumn-1">
+<div class="column-1">
     <div style="min-height: 75px">
         <ol ng-repeat="todo in todoList track by $index" ng-click="chooseTodo($index)">{{todo.title}}</ol>
     </div>
@@ -8,9 +8,9 @@
         </div>
         <div ng-if="isAdding" >
                 <button ng-click="addTodo()">Add</button>
-                <button ng-click="cancel()">Cancle</button>
+                <button ng-click="cancelAdd()">Cancle</button>
         </div>
+        <!-- Add todo form -->
+        <add-form ng-if ="isAdding"></add-form>
     </div>
-    <!-- Add todo form -->
-    
 </div>

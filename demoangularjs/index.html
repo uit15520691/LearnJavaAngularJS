@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang='en' ng-app='app'>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Example - example-directive-isolate-production</title>
+    <script src='./scripts/angular.js'></script>
+    <script src='./scripts/app.js'></script>
+    <script src='./scripts/directives.js'></script>
+    <script src='./scripts/homework.js'></script>
+    <link rel="stylesheet" href="./css/decor.css">
+</head>
+
+<body>
+
+    <div ng-view='mainContent'>
+        <home-work ng-controller='HomeWorkController'></home-work>
+    </div>
+</body>
+
+</html>
+
+<!-- 
+Copyright 2019 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
