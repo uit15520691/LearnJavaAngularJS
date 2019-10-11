@@ -86,9 +86,21 @@ angular.module("HomeWorkModule",[])
     }
 }])
 
-.directive("homeWork",function(){
-    
+.directive("form", function(){
     return {
+        replace: true,
+        scope: {
+            "todo" : "="
+        },
+        restrict :"E",
+        templateUrl:"../views/form/form.html"
+    }
+})
+
+
+.directive("homeWork",function(){
+    return {
+        replace: true,
         restrict :"E",
         templateUrl: "../views/homeWork.html"
     }
@@ -96,6 +108,7 @@ angular.module("HomeWorkModule",[])
 
 .directive("column1", function(){
     return {
+        replace: true,
         restrict :"E",
         templateUrl:"../views/column1/column1.html"
     }
@@ -103,6 +116,7 @@ angular.module("HomeWorkModule",[])
 
 .directive("column2", function(){
     return {
+        replace: true,
         restrict :"E",
         templateUrl:"../views/column2/column2.html"
     }
@@ -110,28 +124,15 @@ angular.module("HomeWorkModule",[])
 
 .directive("content", function(){
     return {
+        replace: true,
         restrict :"E",
         templateUrl:"../views/content/content.html"
     }
 })
 
-.directive("addForm", function(){
-    return {
-        restrict :"E",
-        templateUrl:"../views/addForm/form.html"
-    }
-})
-
-.directive("updateForm", function(){
-    return {
-        restrict :"E",
-        templateUrl:"../views/updateForm/form.html"
-    }
-})
-
-
 .directive("header", function(){
     return {
+        replace: true,
         restrict :"E",
         templateUrl:"../views/header/header.html"
     }

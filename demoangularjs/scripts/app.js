@@ -1,1 +1,1 @@
-angular.module('app',['DirectiveModule','HomeWorkModule'])
+angular.module('app',['HomeWorkModule'])
