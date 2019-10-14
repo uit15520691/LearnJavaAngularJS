@@ -18,4 +18,6 @@ public interface UserDao {
     public Users getUserByEmail(String email);
 
     public UserInfo getUserInfo(String email);
+    public Object getAuditLog();
+    public Object getAuditLog(int revision);
 }

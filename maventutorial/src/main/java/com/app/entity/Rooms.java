@@ -1,10 +1,13 @@
 package com.app.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Audited
 @Table(name = "rooms")
 public class Rooms {
     @Id
@@ -20,18 +23,11 @@ public class Rooms {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList", cascade = CascadeType.ALL)
     private List<Users> userList = new ArrayList<>();
 
-    public List<Users> getUserList() {
-        return userList;
-    }
-
     public void setUserList(List<Users> userList) {
         this.userList = userList;
     }
 
     public Rooms(){}
-
-//    @ManyToMany(mappedBy = "rooms")
-//    private List<Users> users = new ArrayList<>();
 
     public int getId() {
         return id;

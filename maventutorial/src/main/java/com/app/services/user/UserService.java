@@ -17,4 +17,6 @@ public interface UserService {
 
     public UserInfo getUserInfo(String email);
     public Users getUserByEmail(String email);
+    public Object getAuditLog();
+    public Object getAuditLog(int revision);
 }

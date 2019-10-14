@@ -1,8 +1,11 @@
 package com.app.entity;
 
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 
 @Entity
+@Audited
 @Table(name = "user_room")
 public class User_Room {
     @Id

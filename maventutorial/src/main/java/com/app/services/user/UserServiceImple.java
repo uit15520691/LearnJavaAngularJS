@@ -73,4 +73,10 @@ public class UserServiceImple implements UserService {
     public UserInfo getUserInfo(String email) {
         return userDao.getUserInfo(email);
     }
+    public Object getAuditLog(){
+        return userDao.getAuditLog();
+    }
+    public Object getAuditLog(int revision){
+        return userDao.getAuditLog(revision);
+    }
 }

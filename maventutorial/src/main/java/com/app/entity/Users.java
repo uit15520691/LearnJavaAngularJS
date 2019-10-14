@@ -1,12 +1,18 @@
 package com.app.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+@Audited
 @Table(name = "users")
 public class Users {
     @Id
@@ -21,7 +27,7 @@ public class Users {
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+            fetch = FetchType.EAGER, optional = false)
     private UserInfo userInfo;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -54,7 +60,7 @@ public class Users {
     }
 
     public String getEmail() {
-        return password;
+        return email;
     }
 
     public void setEmail(String Email) {

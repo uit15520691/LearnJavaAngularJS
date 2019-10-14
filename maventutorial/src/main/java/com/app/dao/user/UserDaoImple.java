@@ -1,12 +1,13 @@
 package com.app.dao.user;
 
-import com.app.entity.Rooms;
 import com.app.entity.UserInfo;
 import com.app.entity.Users;
-import org.apache.catalina.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,47 +52,6 @@ public class UserDaoImple implements UserDao {
         return 0;
     }
 
-    //
-
-//    public void testRegister() {
-//        //Given
-//        User user = new User();
-//        Session mockSesison = mock(Session.class);
-//        when(sessionFactory.openSession()).thenReturn(mockSesison);
-//        when(mockSesison.save(user)).thenThrow(new Exception());
-//
-//        //When
-//        try {
-//            int result = this.register(user);
-//            fail();
-//
-//        } catch (Exception e) {
-//
-//        }
-//
-//
-//        //Then
-//        assertEqual(result, -1);
-//
-//    }
-//
-//    public void testRegister_exception() {
-//        //Given
-//        User user = new User();
-//        Session mockSesison = mock(Session.class);
-//        when(sessionFactory.openSession()).thenReturn(mockSesison);
-//        Transaction mockTransaction = mock(Transaction.class);
-//        when(mockSesison.getTransaction()).thenReturn(mockTransaction);
-//
-//        //When
-//        int result = this.register(user);
-//
-//        //Then
-//        verify(mockSesison, (times(1))).save(user);
-//        assertEqual(result, 0);
-//
-//    }
-
     public UserInfo getUserInfo(String email) {
         String queryString = "SELECT `usr.email`, `i.name`, `i.contry`, `i.sdt`  FROM `user usr`" +
                 "INNER JOIN `userinfo` t " +
@@ -116,5 +76,29 @@ public class UserDaoImple implements UserDao {
         }
 
         return user.get(0);
+    }
+
+    public Object getAuditLog(){
+        Object usersList = null;
+        Session session = sessionFactory.getCurrentSession();
+        try{
+            AuditReader auditReader = AuditReaderFactory.get(session);
+            AuditQuery auditQuery = auditReader.createQuery().forRevisionsOfEntity(Users.class,true, true);
+            usersList =  auditQuery.getResultList();
+        }
+        catch (Exception e){
+            System.out.println(e.getCause());
+        }
+        return usersList;
+    }
+
+    public Object getAuditLog(int revision){
+        Object usersList;
+        try(Session session = sessionFactory.openSession()){
+            AuditReader auditReader = AuditReaderFactory.get(session);
+            AuditQuery auditQuery = auditReader.createQuery().forEntitiesAtRevision(Users.class,revision);
+            usersList =  auditQuery.getSingleResult();
+        }
+        return usersList;
     }
 }

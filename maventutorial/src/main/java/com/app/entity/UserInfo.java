@@ -1,8 +1,12 @@
 package com.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 
 @Table(name = "userinfo")
+@Audited
 @Entity
 public class UserInfo {
     @Id
@@ -58,9 +62,9 @@ public class UserInfo {
         this.age = age;
     }
 
-    public Users getUser() {
-        return user;
-    }
+//    public Users getUser() {
+//        return user;
+//    }
 
     public String getSdt() {
         return sdt;
