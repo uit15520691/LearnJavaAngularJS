@@ -20,7 +20,7 @@ public class Rooms {
     @Column(name = "floor")
     private int floor;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roomList", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roomList", cascade = CascadeType.ALL)
     private List<Users> userList = new ArrayList<>();
 
     public void setUserList(List<Users> userList) {

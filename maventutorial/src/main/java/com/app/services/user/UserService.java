@@ -4,10 +4,12 @@ import com.app.entity.UserInfo;
 import com.app.entity.Users;
 import com.app.models.LoginDTO;
 import com.app.models.RegisterDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 
+@Transactional
 public interface UserService {
     public List<Users> getAllUser();
 

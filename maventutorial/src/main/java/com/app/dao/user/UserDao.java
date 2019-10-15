@@ -1,5 +1,6 @@
 package com.app.dao.user;
 
+import com.app.entity.Role;
 import com.app.entity.UserInfo;
 import com.app.entity.Users;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,6 @@ public interface UserDao {
     public UserInfo getUserInfo(String email);
     public Object getAuditLog();
     public Object getAuditLog(int revision);
+
+    public List<String> getRoleByEmail(String email);
 }

@@ -1,5 +1,6 @@
 package com.app.dao.user;
 
+import com.app.entity.Role;
 import com.app.entity.UserInfo;
 import com.app.entity.Users;
 import org.hibernate.Session;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDaoImple implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
@@ -26,6 +28,15 @@ public class UserDaoImple implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         List<Users> list = session.createNativeQuery(queryString).list();
         return list;
+    }
+
+    public List<String> getRoleByEmail(String email){
+        String queryString = "Select `name` from `role` " +
+                "join user_role "  +
+                "where `user_email = '" +email+"'";
+        Session session = sessionFactory.getCurrentSession();
+        List<String> roleList = session.createNativeQuery(queryString).list();
+        return roleList;
     }
 
     public String login(String email, String password) {
@@ -39,7 +50,6 @@ public class UserDaoImple implements UserDao {
         return result.get(0);
     }
 
-    @Transactional
     public int register(Users user) {
         try(Session session = sessionFactory.openSession();) {
             session.beginTransaction();
@@ -61,7 +71,6 @@ public class UserDaoImple implements UserDao {
         return info;
     }
 
-    @Transactional
     public Users getUserByEmail(String email){
         String queryString = "SELECT * FROM `users` " +
                 "WHERE `email` = '"+email+"'";
@@ -79,12 +88,12 @@ public class UserDaoImple implements UserDao {
     }
 
     public Object getAuditLog(){
-        Object usersList = null;
+        List<Users> usersList = new ArrayList<>();
         Session session = sessionFactory.getCurrentSession();
         try{
             AuditReader auditReader = AuditReaderFactory.get(session);
             AuditQuery auditQuery = auditReader.createQuery().forRevisionsOfEntity(Users.class,true, true);
-            usersList =  auditQuery.getResultList();
+            usersList.addAll(auditQuery.getResultList());
         }
         catch (Exception e){
             System.out.println(e.getCause());

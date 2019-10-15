@@ -33,8 +33,14 @@ public class UserController {
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
     }
 
+//    @RequestMapping(value = "/login", method = {RequestMethod.POST})
+//    public ResponseEntity<Object> login(@RequestBody LoginDTO accountInfo) {
+//        return new ResponseEntity<Object>(userService.login(accountInfo), HttpStatus.OK);
+//    }
+
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public ResponseEntity<Object> login(@RequestBody LoginDTO accountInfo) {
+    public ResponseEntity<Object> login(@FormParam("name") String name,
+                                        @FormParam("age") int age) {
         return new ResponseEntity<Object>(userService.login(accountInfo), HttpStatus.OK);
     }
 
