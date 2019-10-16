@@ -2,7 +2,10 @@ package com.app.entity;
 
 import org.hibernate.envers.Audited;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Audited
@@ -15,8 +18,10 @@ public class User_Room {
     @Column(name = "userEmail")
     private String userEmail;
 
-    public User_Room(){}
-    public User_Room(int roomID, String userEmail){
+    public User_Room() {
+    }
+
+    public User_Room(int roomID, String userEmail) {
         this.roomID = roomID;
         this.userEmail = userEmail;
     }

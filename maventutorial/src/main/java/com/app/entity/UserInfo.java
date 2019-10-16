@@ -1,6 +1,5 @@
 package com.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -9,40 +8,36 @@ import javax.persistence.*;
 @Audited
 @Entity
 public class UserInfo {
+    @Column(name = "age")
+    Integer age;
     @Id
     @Column(name = "email")
     private String email;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "country")
     private String country;
-
     @Column(name = "sdt")
     private String sdt;
-
-    @Column(name = "age")
-    Integer age;
-
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Users user;
 
 
-    public UserInfo(){}
-    public UserInfo(String email, String name,String country,String sdt,Integer age)
-    {
+    public UserInfo() {
+    }
 
-        this.email= email;
+    public UserInfo(String email, String name, String country, String sdt, Integer age) {
 
-        this.name=name;
+        this.email = email;
 
-        this.country=country;
+        this.name = name;
 
-        this.sdt= sdt;
+        this.country = country;
 
-        this.age=age;
+        this.sdt = sdt;
+
+        this.age = age;
     }
 
 
@@ -50,47 +45,47 @@ public class UserInfo {
         this.user = user;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-//    public Users getUser() {
-//        return user;
-//    }
-
     public String getSdt() {
         return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+//    public Users getUser() {
+//        return user;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

@@ -1,10 +1,7 @@
 package com.app.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -40,9 +37,18 @@ public class Users {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name="user_email"),
-            inverseJoinColumns = @JoinColumn(name="role_id"))
+            joinColumns = @JoinColumn(name = "user_email"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    public Users(String email, String password, String subscribed) {
+        this.email = email;
+        this.password = password;
+        this.subscribed = subscribed;
+    }
+
+    public Users() {
+    }
 
     public Set<Role> getRoles() {
         return roles;
@@ -52,13 +58,6 @@ public class Users {
         this.roles = roles;
     }
 
-    public Users(String email, String password, String subscribed) {
-        this.email = email;
-        this.password = password;
-        this.subscribed = subscribed;
-    }
-
-    public Users(){}
     public UserInfo getUserInfo() {
         return userInfo;
     }

@@ -23,11 +23,12 @@ public class Rooms {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roomList", cascade = CascadeType.ALL)
     private List<Users> userList = new ArrayList<>();
 
+    public Rooms() {
+    }
+
     public void setUserList(List<Users> userList) {
         this.userList = userList;
     }
-
-    public Rooms(){}
 
     public int getId() {
         return id;

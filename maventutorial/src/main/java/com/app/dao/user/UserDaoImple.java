@@ -1,13 +1,11 @@
 package com.app.dao.user;
 
-import com.app.entity.Role;
 import com.app.entity.UserInfo;
 import com.app.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,10 +28,10 @@ public class UserDaoImple implements UserDao {
         return list;
     }
 
-    public List<String> getRoleByEmail(String email){
+    public List<String> getRoleByEmail(String email) {
         String queryString = "Select `name` from `role` " +
-                "join user_role "  +
-                "where `user_email = '" +email+"'";
+                "join user_role " +
+                "where `user_email = '" + email + "'";
         Session session = sessionFactory.getCurrentSession();
         List<String> roleList = session.createNativeQuery(queryString).list();
         return roleList;
@@ -51,7 +49,7 @@ public class UserDaoImple implements UserDao {
     }
 
     public int register(Users user) {
-        try(Session session = sessionFactory.openSession();) {
+        try (Session session = sessionFactory.openSession();) {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
@@ -71,15 +69,14 @@ public class UserDaoImple implements UserDao {
         return info;
     }
 
-    public Users getUserByEmail(String email){
+    public Users getUserByEmail(String email) {
         String queryString = "SELECT * FROM `users` " +
-                "WHERE `email` = '"+email+"'";
+                "WHERE `email` = '" + email + "'";
         List<Users> user = new ArrayList<>();
-        try{
+        try {
             Session session = sessionFactory.getCurrentSession();
-            user =session.createNativeQuery(queryString, Users.class).list();
-        }
-        catch (Exception e){
+            user = session.createNativeQuery(queryString, Users.class).list();
+        } catch (Exception e) {
             System.out.println(e.getCause());
             throw e;
         }
@@ -87,26 +84,25 @@ public class UserDaoImple implements UserDao {
         return user.get(0);
     }
 
-    public Object getAuditLog(){
+    public Object getAuditLog() {
         List<Users> usersList = new ArrayList<>();
         Session session = sessionFactory.getCurrentSession();
-        try{
+        try {
             AuditReader auditReader = AuditReaderFactory.get(session);
-            AuditQuery auditQuery = auditReader.createQuery().forRevisionsOfEntity(Users.class,true, true);
+            AuditQuery auditQuery = auditReader.createQuery().forRevisionsOfEntity(Users.class, true, true);
             usersList.addAll(auditQuery.getResultList());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getCause());
         }
         return usersList;
     }
 
-    public Object getAuditLog(int revision){
+    public Object getAuditLog(int revision) {
         Object usersList;
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             AuditReader auditReader = AuditReaderFactory.get(session);
-            AuditQuery auditQuery = auditReader.createQuery().forEntitiesAtRevision(Users.class,revision);
-            usersList =  auditQuery.getSingleResult();
+            AuditQuery auditQuery = auditReader.createQuery().forEntitiesAtRevision(Users.class, revision);
+            usersList = auditQuery.getSingleResult();
         }
         return usersList;
     }

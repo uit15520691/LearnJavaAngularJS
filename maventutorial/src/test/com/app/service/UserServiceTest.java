@@ -1,4 +1,5 @@
 package com.app.service;
+
 import com.app.dao.user.UserDao;
 import com.app.entity.UserInfo;
 import com.app.models.RegisterDTO;
@@ -8,10 +9,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 import java.util.Map;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.anyObject;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,9 +32,9 @@ public class UserServiceTest {
 //    }
 
     @Test
-    public void testRegister_success(){
+    public void testRegister_success() {
         // Given
-        RegisterDTO registerDTO = new RegisterDTO("quang@gmail.com","123456", "quang nguyen", "viet nam", 12,"yes", "0814567890");
+        RegisterDTO registerDTO = new RegisterDTO("quang@gmail.com", "123456", "quang nguyen", "viet nam", 12, "yes", "0814567890");
         when(userDao.register(anyObject())).thenReturn(0);
 
         // When
@@ -44,9 +47,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testRegister_fail(){
+    public void testRegister_fail() {
         // Given
-        RegisterDTO registerDTO = new RegisterDTO("quang@gmail.com","123456", "quang nguyen", "viet nam", 12,"yes", "0814567890");
+        RegisterDTO registerDTO = new RegisterDTO("quang@gmail.com", "123456", "quang nguyen", "viet nam", 12, "yes", "0814567890");
         when(userDao.register(anyObject())).thenReturn(-1);
 
         // When

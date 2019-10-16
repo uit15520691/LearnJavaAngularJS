@@ -21,34 +21,31 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<Users> users = new HashSet<>();
 
-    public Role(){}
-
-    public Role(int id, String name){
-        this.id=id;
-        this.name=name;
+    public Role() {
     }
 
-    public Set<Users> getUsers() {
-        return users;
+    public Role(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public void setUsers(Set<Users> users) {
         this.users = users;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

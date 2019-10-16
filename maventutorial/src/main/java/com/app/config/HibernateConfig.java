@@ -71,6 +71,7 @@ public class HibernateConfig {
         txManager.setSessionFactory(sessionFactory().getObject());
         return txManager;
     }
+
     @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

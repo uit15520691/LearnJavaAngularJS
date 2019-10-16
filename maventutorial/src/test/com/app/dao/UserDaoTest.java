@@ -16,8 +16,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -30,9 +31,9 @@ public class UserDaoTest {
     SessionFactory sessionFactory;
 
     @Test
-    public void testRegister_success(){
+    public void testRegister_success() {
         // Given
-        Users user = new Users("quang@gmail.com","123456", "yes");
+        Users user = new Users("quang@gmail.com", "123456", "yes");
 
         Session mockSession = mock(Session.class);
         when(sessionFactory.openSession()).thenReturn(mockSession);
@@ -50,13 +51,13 @@ public class UserDaoTest {
 
         // When
 //        verify(mockSession,times(1)).save(user);
-        assertEquals(result,0);
+        assertEquals(result, 0);
     }
 
     @Test
-    public void testRegister_fail(){
+    public void testRegister_fail() {
         // Given
-        Users user = new Users("quang@gmail.com","123456", "yes");
+        Users user = new Users("quang@gmail.com", "123456", "yes");
 
         Session mockSession = mock(Session.class);
         when(sessionFactory.openSession()).thenReturn(mockSession);
@@ -70,21 +71,21 @@ public class UserDaoTest {
         int result = userDao.register(user);
 
         // Then
-        assertEquals(result,-1);
+        assertEquals(result, -1);
     }
 
     @Test
-    public void testGetUserByEmail_success(){
+    public void testGetUserByEmail_success() {
         // Given
         String email = "quang@gmail.com";
         String queryString = "SELECT * FROM `users` " +
-                "WHERE `email` = '"+email+"'";
+                "WHERE `email` = '" + email + "'";
 
         Session mockSession = mock(Session.class);
         when(sessionFactory.getCurrentSession()).thenReturn(mockSession);
 
         NativeQuery mockNativeQuery = mock(NativeQuery.class);
-        when(mockSession.createNativeQuery(queryString,Users.class)).thenReturn(mockNativeQuery);
+        when(mockSession.createNativeQuery(queryString, Users.class)).thenReturn(mockNativeQuery);
 
         List<Users> mockList = mock(ArrayList.class);
         Users mockUser = mock(Users.class);
@@ -101,25 +102,25 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testGetUserByEmail_fail(){
+    public void testGetUserByEmail_fail() {
         // Given
         String email = "quang@gmail.com";
         String queryString = "SELECT * FROM `users` " +
-                "WHERE `email` = '"+email+"'";
+                "WHERE `email` = '" + email + "'";
 
         Session mockSession = mock(Session.class);
         when(sessionFactory.getCurrentSession()).thenReturn(mockSession);
 
         NativeQuery mockNativeQuery = mock(NativeQuery.class);
-        when(mockSession.createNativeQuery(queryString,Users.class)).thenThrow(Exception.class);
+        when(mockSession.createNativeQuery(queryString, Users.class)).thenThrow(Exception.class);
 
         // When
-        try{
+        try {
             Users actualUser = userDao.getUserByEmail(email);
             fail();
         }
         // Then
-        catch (Exception e){
+        catch (Exception e) {
             assertNotNull(e);
         }
 
