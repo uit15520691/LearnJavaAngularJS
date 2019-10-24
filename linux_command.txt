@@ -1,0 +1,56 @@
+centos
+sudo ln -sfn /opt/tools/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
+export M2_HOME=/opt/tools/apache-maven-3.3.9/
+mv source/folder dest/folder
+mkdir 
+cp source dest
+mvn spring-boot:debug
+
+ubuntu
+"sudo nano /etc/profile"
+
+JAVA_HOME=<Directory where JAVA has been extracted>/jdk1.8.0
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export JAVA_HOME
+export PATH
+
+. /etc/profile
+
+sudo update-alternatives --install "/usr/bin/java" "java" "<Directory where JAVA has been extracted>/bin/java" 1
+sudo update-alternatives --install "/usr/bin/javac" "javac" "<Directory where JAVA has been extracted>/bin/javac" 1
+sudo update-alternatives --install "/usr/bin/javaws" "javaws" "<Directory where JAVA has been extracted>/bin/javaws" 1
+
+sudo update-alternatives --set java <Directory where JAVA has been extracted>/bin/java
+sudo update-alternatives --set javac <Directory where JAVA has been extracted>/bin/javac
+sudo update-alternatives --set javaws <Directory where JAVA has been extracted>/bin/javaws
+
+sudo mysql -u root
+mysql> USE mysql;
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+$ service mysql restart
+
+tar -xf archive.tar.gz -C /home/linuxize/files
+
+
+
+M2_HOME="/opt/apache-maven-3.6.0"
+/opt/apache-maven-3.6.0/bin
+sudo nano /etc/environment
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk-10.0.2/bin:/opt/apache-maven-3.6.0/bin"
+JAVA_HOME="/usr/lib/jvm/jdk-10.0.2"
+M2_HOME="/opt/apache-maven-3.6.0"
+
+sudo update-alternatives --install "/usr/bin/mvn" "mvn" "/opt/apache-maven-3.6.0/bin/mvn" 0
+sudo update-alternatives --set mvn /opt/apache-maven-3.6.0/bin/mvn
+
+sudo wget https://raw.github.com/dimaj/maven-bash-completion/master/bash_completion.bash --output-document /etc/bash_completion.d/mvn
+
+mvn –version
+
+ALTER TABLE t1 ENGINE = InnoDB;
+
+
+sudo ln -s /opt/google/chrome/google-chromedriver /usr/bin/chromedriver
